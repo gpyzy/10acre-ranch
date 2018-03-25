@@ -126,6 +126,7 @@ build_master()
     --xhyve-memory-size="${SERVER_MACHINE_SIZE}" \
     --xhyve-cpu-count="${SERVER_MACHINE_CPUS}" \
     --xhyve-boot-cmd="${BOOT_ARGS} host=${name}" \
+    --xhyve-experimental-nfs-share=true \
     ${mirror} ${CLUSTER_NAME}
 
   docker-machine ssh ${CLUSTER_NAME} docker run -d \
@@ -165,6 +166,7 @@ build_hosts()
         --driver=xhyve \
         --xhyve-boot2docker-url="${BOOT2DOCKER}" \
         --xhyve-memory-size="${HOST_MACHINE_SIZE}" \
+        --xhyve-experimental-nfs-share=true \
         --xhyve-boot-cmd="${BOOT_ARGS} host=${name}" ${mirror} ${name} 1>&2;
     done
   fi
